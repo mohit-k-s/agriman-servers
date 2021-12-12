@@ -11,24 +11,31 @@ const mongoose = require('mongoose')
 const mysql = require('mysql')
 const cors = require('cors')
 
-const mongoConn = process.env.mongoConn
+let mongoConnUrl = process.env.mongoConn
 
 const PORT = process.env.PORT || 4000 
 app.use(cors())
 app.use(express.json())
 
+if(!process.env.NODE_ENV){
+    let {mongoConn} = require('./consts')
+    mongoConnUrl = mongoConn.url
+}
+
 // routes
 
 const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/user_routes')
 
 
 async function globalserver(){
-    mongoose.connect(mongoConn)
+    mongoose.connect(mongoConnUrl)
     mongoose.connection.once('open' , ()=>{
         console.log('connected to the auth database'.cyan)
     })
     
     app.use(authRoutes)
+    app.use(userRoutes)
     app.get('/', (req, res)=>{
         res.send('agriman - servers')
     })
