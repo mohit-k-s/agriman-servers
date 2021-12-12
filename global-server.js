@@ -22,13 +22,12 @@ app.use(express.json())
 const authRoutes = require('./routes/auth')
 
 
-mongoose.connect(mongoConn.url)
-mongoose.connection.once('open' , ()=>{
-    console.log('connected to the auth database'.cyan)
-})
-
-
 async function globalserver(){
+    mongoose.connect(mongoConn)
+    mongoose.connection.once('open' , ()=>{
+        console.log('connected to the auth database'.cyan)
+    })
+    
     app.use(authRoutes)
     app.get('/', (req, res)=>{
         res.send('agriman - servers')
