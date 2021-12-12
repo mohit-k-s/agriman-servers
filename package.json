@@ -1,0 +1,28 @@
+{
+  "name": "agriman-servers",
+  "version": "1.0.0",
+  "description": "This repository contains the server side code for the agriman project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohit-k-s/agriman-servers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mohit-k-s/agriman-servers/issues"
+  },
+  "homepage": "https://github.com/mohit-k-s/agriman-servers#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.1.1"
+  }
+}
