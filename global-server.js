@@ -10,10 +10,9 @@ const app = express()
 const mongoose = require('mongoose')
 const mysql = require('mysql')
 const cors = require('cors')
-const {mongoConn} = require('./consts')
-if(mongoConn == null) {
-    mongoConn = process.env.mongoConn
-}
+
+const mongoConn = process.env.mongoConn
+
 const PORT = process.env.PORT || 4000 
 app.use(cors())
 app.use(express.json())
