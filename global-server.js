@@ -10,7 +10,10 @@ const app = express()
 const mongoose = require('mongoose')
 const mysql = require('mysql')
 const cors = require('cors')
-const {mongoConn , mysqlConn} = require('./consts')
+const {mongoConn} = require('./consts')
+if(mongoConn == null) {
+    mongoConn = process.env.mongoConn
+}
 const PORT = process.env.PORT || 4000 
 app.use(cors())
 app.use(express.json())
@@ -26,7 +29,7 @@ mongoose.connection.once('open' , ()=>{
 })
 
 
-async function main(){
+async function globalserver(){
     app.use(authRoutes)
     app.get('/', (req, res)=>{
         res.send('agriman - servers')
@@ -37,7 +40,4 @@ async function main(){
     
 }
 
-
-main().catch(err =>{
-    console.log(err);
-})
+module.exports = {globalserver}

@@ -4,7 +4,7 @@
   "description": "This repository contains the server side code for the agriman project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon global-server.js",
+    "start": "nodemon web.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
