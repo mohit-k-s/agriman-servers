@@ -5,7 +5,7 @@ var router=express.Router();
 router.use(express.json())
 
 router.post('/signupOrlookup',(req,res)=>{
-    User.findOne({username : req.body.username}, (err, user) =>{
+    User.findOne({email : req.body.email}, (err, user) =>{
         if(err) return res.send( { message : 'unable to look up right now', code : 0})
         else if(user) return res.send( {message : 'a user with this name exists', code : 1})
         else{
