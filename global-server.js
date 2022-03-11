@@ -10,12 +10,29 @@ const app = express()
 const mongoose = require('mongoose')
 const mysql = require('mysql')
 const cors = require('cors')
+const firebase = require('firebase/app')
 
 let mongoConnUrl = process.env.mongoConn
 
 const PORT = process.env.PORT || 4000 
 app.use(cors())
 app.use(express.json())
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDkvrRFy91iZgLg6W1BWvLOH8s26z01ets",
+  authDomain: "temhupr.firebaseapp.com",
+  databaseURL: "https://temhupr-default-rtdb.firebaseio.com",
+  projectId: "temhupr",
+  storageBucket: "temhupr.appspot.com",
+  messagingSenderId: "8790894031",
+  appId: "1:8790894031:web:b29f3c37ad802aa45a1eba"
+};
+
+const fb_app = firebase.initializeApp(firebaseConfig)
+const {getDatabase , ref , set}= require('firebase/database')
+
+const rtdb = getDatabase(fb_app)
 
 if(!process.env.NODE_ENV){
     let {mongoConn} = require('./consts')
@@ -41,6 +58,12 @@ async function globalserver(){
     })
     app.listen(PORT , ()=>{
         console.log('listening on port 4000'.yellow)
+    })
+    app.post('/Fan' , (req, res) =>{
+      set(ref(rtdb , 'Fan'  ) , {value : req.body.value}).then(() => res.send('done'))
+    })
+    app.post('/Motor' , (req, res) =>{
+      set(ref(rtdb , 'Motor'  ) , {value : req.body.value}).then(() => res.send('done'))
     })
     
 }

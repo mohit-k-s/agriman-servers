@@ -16,7 +16,7 @@ router.post('/signupOrlookup',(req,res)=>{
         else{
             // user not exists , register this user
             let nuser=new User({
-                email:     req.body.email,
+                email: req.body.email,
                 name : "randomName",
                 password : req.body.password
             });
