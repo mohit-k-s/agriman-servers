@@ -12,8 +12,8 @@ const mysql = require('mysql')
 const cors = require('cors')
 const firebase = require('firebase/app')
 
-require('./consts')
-let mongoConnUrl = process.env.mongoConn
+let {mongoConn, FIREBASE_API_KEY} = require('./consts')
+let mongoConnUrl = mongoConn.url
 
 const PORT = process.env.PORT || 4000 
 app.use(cors())
@@ -22,12 +22,12 @@ app.use(express.json())
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
-  authDomain: "temhupr.firebaseapp.com",
-  databaseURL: "https://temhupr-default-rtdb.firebaseio.com",
-  projectId: "temhupr",
-  storageBucket: "temhupr.appspot.com",
-  messagingSenderId: "8790894031",
-  appId: "1:8790894031:web:b29f3c37ad802aa45a1eba"
+  authDomain: "final-project-6a70d.firebaseapp.com",
+  databaseURL: "https://final-project-6a70d-default-rtdb.firebaseio.com",
+  projectId: "final-project-6a70d",
+  storageBucket: "final-project-6a70d.appspot.com",
+  messagingSenderId: "1098542205114",
+  appId: "1:1098542205114:web:4a96feb29bbfaafd4eda83"
 };
 
 const fb_app = firebase.initializeApp(firebaseConfig)
@@ -35,10 +35,6 @@ const {getDatabase , ref , set}= require('firebase/database')
 
 const rtdb = getDatabase(fb_app)
 
-if(!process.env.NODE_ENV){
-    let {mongoConn, FIREBASE_API_KEY} = require('./consts')
-    mongoConnUrl = mongoConn.url
-}
 
 // routes
 
